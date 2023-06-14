@@ -37,9 +37,9 @@ Console.WriteLine("================");
 
 for (var x = 0; x < amount; x++)
 {
-    Console.WriteLine($"id: {listaTareasPendientes[x].Id}");
-    Console.WriteLine($"duracion: {listaTareasPendientes[x].Duracion}");
-    Console.WriteLine($"descripcion: {listaTareasPendientes[x].Descripcion}");
+    Console.WriteLine($"Id: {listaTareasPendientes[x].Id}");
+    Console.WriteLine($"Duracion: {listaTareasPendientes[x].Duracion}");
+    Console.WriteLine($"Descripcion: {listaTareasPendientes[x].Descripcion}");
     Console.WriteLine("---------------");
     Console.Write(@"¿La tarea ha sido realizada?(y/n): ");
     string? preRes = Console.ReadLine();
@@ -72,9 +72,9 @@ Console.WriteLine("       TERMINADAS      ");
 Console.WriteLine("-----------------------");
 listaTareasTerminadas.ForEach(tarea =>
 {
-    Console.WriteLine($"{tarea.Id}");
-    Console.WriteLine($"{tarea.Duracion}");
-    Console.WriteLine($"{tarea.Descripcion}");
+    Console.WriteLine($"Id: {tarea.Id}");
+    Console.WriteLine($"Duracion: {tarea.Duracion}");
+    Console.WriteLine($"Descripción: {tarea.Descripcion}");
 });
 
 // Muestreo de Lista de tareas Pendientes (Luego de sufrir, o no, cambios)
@@ -83,8 +83,33 @@ Console.WriteLine("       PENDIENTES      ");
 Console.WriteLine("-----------------------");
 listaTareasPendientes.ForEach(tarea =>
 {
-    Console.WriteLine($"{tarea.Id}");
-    Console.WriteLine($"{tarea.Duracion}");
-    Console.WriteLine($"{tarea.Descripcion}");
+    Console.WriteLine($"Id: {tarea.Id}");
+    Console.WriteLine($"Duracion: {tarea.Duracion}");
+    Console.WriteLine($"Descripción: {tarea.Descripcion}");
 });
+
+// Busqueda por descripcion
+
+Console.WriteLine("-----------------------");
+Console.WriteLine("       BUSQUEDA        ");
+Console.WriteLine("-----------------------");
+Console.Write("Ingrese la busqueda: ");
+string? searchString = Console.ReadLine();
+// - Obtencion de la tarea que contenga una descripcion que contenga el input del usuario. 
+// (Sin Case Sensitive)
+Tarea? found = listaTareasPendientes.Find(tarea => tarea.Descripcion.Contains(searchString!, StringComparison.OrdinalIgnoreCase));
+if (found != null)
+{
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("    TAREA ENCONTRADA   ");
+    Console.WriteLine("-----------------------");
+    Console.WriteLine($"Id: {found.Id}");
+    Console.WriteLine($"Duración: {found.Duracion}");
+    Console.WriteLine($"Descripción: {found.Descripcion}");
+    Console.WriteLine("-----------------------");
+}
+else
+{
+    Console.WriteLine("No se ha encontrado ninguna descripcion de tarea que coincida con la ingresa.");
+}
 
