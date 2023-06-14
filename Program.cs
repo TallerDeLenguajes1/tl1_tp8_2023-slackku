@@ -1,5 +1,7 @@
 ﻿using TareaSpace;
 
+int contadorHoras = 0;
+
 // Instancia de random para generar descripciones, cantidad y duracion de tareas pseudo-aleatorias
 Random rnd = new Random();
 
@@ -52,6 +54,7 @@ for (var x = 0; x < amount; x++)
             // Solucion a problemas generados por eliminar elemento 
             // de la list durante el proceso de recorrido de la misma (Cambian indices)
             idToDeleteFromPendiente.Add(listaTareasPendientes[x].Id);
+            contadorHoras += listaTareasPendientes[x].Duracion;
         }
     }
     else
@@ -113,3 +116,14 @@ else
     Console.WriteLine("No se ha encontrado ninguna descripcion de tarea que coincida con la ingresa.");
 }
 
+// No hace falta fijarse si ya existe el archivo, no sobreescribe borrando lo anterior.
+// Crear Archivo 
+string rutaActual = Directory.GetCurrentDirectory();
+string rutaFinal = rutaActual + @"\horasLog.txt";
+Console.WriteLine("ruta: " + rutaFinal);
+using (StreamWriter horasLog = File.AppendText(rutaFinal))
+{
+    DateTime fechaAdd = DateTime.Now;
+    horasLog.WriteLine($"Horas trabajadas: {contadorHoras} | {fechaAdd.ToString()}");
+    horasLog.Close();
+}
